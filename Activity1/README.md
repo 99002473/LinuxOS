@@ -1,2 +1,2 @@
-# LinuxOScode
-Repo documentaing the work for linuxBSP
+# LinuxOS 
+This Repo documents all the work for activity1's makefile creation.
