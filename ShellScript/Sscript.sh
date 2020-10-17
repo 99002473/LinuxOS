@@ -1,4 +1,4 @@
-#! /bine/bash
+#!/bin/bash
 
 FILE_PATH="Input.csv"
 RESULT_FILE="Results.csv"
