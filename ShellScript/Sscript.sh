@@ -2,7 +2,7 @@
 
 FILE_PATH="Input.csv"
 RESULT_FILE="Results.csv"
-printf "Name,Email-ID,GitRepo-Link,Clone-Status,Build-Status,Error,Valgrind" > $RESULT_FILE
+printf "Name,Email-ID,GIT-URL,Git-Clone-Status,Build-status,Cppcheck,Valgrind" > $RESULT_FILE
 
 while IFS=, read -r NAME ID REPO;
 do
