@@ -7,8 +7,8 @@ printf "Name,Email-ID,GIT-URL,Git-Clone-Status,Build-status,Cppcheck,Valgrind" >
 while IFS=, read -r NAME ID REPO;
 do
    [[$NAME != 'Name']] && echo "$NAME"
-   [[$ID != 'Email ID']] && echo "$ID"
-   if [ "$REPO" != 'Repo Link' ]; 
+   [[$ID != 'Email-ID']] && echo "$ID"
+   if [ "$REPO" != 'Repo-Link' ]; 
        then
        repo=$REPO
        git clone "$REPO"
@@ -33,4 +33,4 @@ do
         verr="$val"
         printf "$name,$id,$repo,$clone,$bu,$er,$verr\n" >> $RESULT_FILE
    fi
-done < ${FILE_PATH}
+done < "${FILE_PATH}"
