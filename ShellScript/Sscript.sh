@@ -6,13 +6,13 @@ printf "Name,Email-ID,GIT-URL,Git-Clone-Status,Build-status,Cppcheck,Valgrind" >
 
 while IFS=, read -r NAME ID REPO;
 do
-   [[$NAME != 'Name']] && echo "$NAME"
-   [[$ID != 'Email-ID']] && echo "$ID"
+   [[ $NAME != 'Name' ]] && echo "$NAME"
+   [[ $ID != 'Email-ID' ]] && echo "$ID"
    if [ "$REPO" != 'Repo-Link' ]; 
        then
        repo=$REPO
        git clone "$REPO"
-       if [$? -eq 0]; 
+       if [ "$?" -eq 0 ]; 
           then
           clone="Clone success"
        else
@@ -21,6 +21,12 @@ do
         REPO= `echo "$REPO" | cut -d'/' -c5` 
         echo "REPO = $REPO"
         make -C "$REPO"
+        if [ $? -eq 0 ]; then
+            bu="Build success"
+        else
+            bu="Build Failure"
+        fi
+       ERR=`cppcheck "$REPO" | grep 'error' | wc -l` 
        if [$? -eq 0]; 
            then
            er="$ERROR"
@@ -28,7 +34,7 @@ do
         make test -C $REPO
         EXE=`find "$REPO" -name "Test*.out"`
         valgrind "./$EXE" 2>log.txt
-        STR = $( tail -n 1 log.txt)
+        STR=$(tail -n 1 log.txt)
         val=$(echo ${STR:24:3})
         verr="$val"
         printf "$name,$id,$repo,$clone,$bu,$er,$verr\n" >> $RESULT_FILE
