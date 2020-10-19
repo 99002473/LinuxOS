@@ -33,4 +33,4 @@ do
         verr="$val"
         printf "$name,$id,$repo,$clone,$bu,$er,$verr\n" >> $RESULT_FILE
    fi
-done < "${FILE PATH}"
+done < ${FILE_PATH}
