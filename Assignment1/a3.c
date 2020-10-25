@@ -6,7 +6,7 @@ int main()
     FILE * file;
     char path[100];
     char ch;
-    int char_num, word_num, line_num;
+    int nchar, nword, nline;
     
     file = fopen("file1.txt", "r");
     if (file == NULL)
@@ -17,28 +17,27 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    char_num = word_num = line_num = 0;
+    nchar = nword = nline = 0;
     while ((ch = fgetc(file)) != EOF)
     {
-        char_num++;
+        nchar++;
 
-        /* Check new line */
-        if (ch == '\n' || ch == '\0')
-            line_num++;
+        if (ch == '\n' || ch == '\0')                             //checking for a line
+            nline++;
 
-        /* Check word_num */
-        if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\0')
-            word_num++;
+        
+        if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\0') //cheching for a word
+            nword++;
     }
-    if (char_num > 0)
+    if (nchar > 0)
     {
-        word_num++;
-        line_num++;
+        nword++;
+        nline++;
     }
     printf("\n");
-    printf("Total char_num = %d\n", char_num);
-    printf("Total word_num      = %d\n", word_num);
-    printf("Total line_num      = %d\n", line_num);
+    printf("Total number of char = %d\n", nchar);
+    printf("Total number of word      = %d\n", nword);
+    printf("Total number of line      = %d\n", nline);
 
     fclose(file);
 
