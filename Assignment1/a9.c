@@ -6,21 +6,21 @@
 // driver code 
 int main() 
 { 
-    time_t s, val = 1; 
-    struct tm* current_time; 
+    time_t sec, value = 1; 
+    struct tm* present_time; 
   
     // time in seconds 
-    s = time(NULL); 
+    sec = time(NULL); 
   
     // to get current time 
-    current_time = localtime(&s); 
+    present_time = localtime(&sec); 
   
     // print time in minutes, 
     // hours and seconds 
     printf("%02d:%02d:%02d", 
-           current_time->tm_hour, 
-           current_time->tm_min, 
-           current_time->tm_sec); 
+           present_time->tm_hour, 
+           present_time->tm_min, 
+           present_time->tm_sec); 
   
     return 0; 
 } 
