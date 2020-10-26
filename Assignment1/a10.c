@@ -9,7 +9,7 @@ void signal_hangup();
 void signal_interact(); 
 void signal_quit(); 
   
- 
+  
 void main() 
 { 
     int pid; 
