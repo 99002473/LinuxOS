@@ -5,9 +5,9 @@
 #include <unistd.h> 
   
 
-void sighup(); 
-void sigint(); 
-void sigquit(); 
+void signal_hangup(); 
+void signal_interact(); 
+void signal_quit(); 
   
  
 void main() 
@@ -15,15 +15,17 @@ void main()
     int pid; 
   
     /* child process */
-    if ((pid = fork()) < 0) { 
+    if ((pid = fork()) < 0) 
+    { 
         perror("fork"); 
         exit(1); 
     } 
   
-    if (pid == 0) { /* child */
-        signal(SIGHUP, sighup); 
-        signal(SIGINT, sigint); 
-        signal(SIGQUIT, sigquit); 
+    if (pid == 0)
+    { /* child */
+        signal(SIGHUP, signal_hangup); 
+        signal(SIGINT, signal_interact); 
+        signal(SIGQUIT, signal_quit); 
         for (;;) 
             ; /* loop for ever */
     } 
@@ -34,7 +36,7 @@ void main()
         kill(pid, SIGHUP); 
   
         sleep(3); 
-        printf("\nParent: sends SIGINT signal\n\n"); 
+        printf("\nParent: sends signal_interact signal\n\n"); 
         kill(pid, SIGINT); 
   
         sleep(3); 
@@ -44,24 +46,24 @@ void main()
     } 
 } 
   
-// sighup() function definition 
-void sighup() 
+// signal_hangup() function definition 
+void signal_hangup() 
   
 { 
-    signal(SIGHUP, sighup); /* reset signal */
+    signal(SIGHUP, signal_hangup); /* reset signal */
     printf("Child  received a SIGHUP signal\n"); 
 } 
   
-// sigint() function definition 
-void sigint() 
+// signal_interact() function definition 
+void signal_interact() 
   
 { 
-    signal(SIGINT, sigint); /* reset signal */
-    printf("Child received a SIGINT signal\n"); 
+    signal(SIGINT, signal_interact); /* reset signal */
+    printf("Child received a signal_interact signal\n"); 
 } 
   
-// sigquit() function definition 
-void sigquit() 
+// signal_quit() function definition 
+void signal_quit() 
 { 
     printf("Killed!\n"); 
     exit(0); 
