@@ -9,7 +9,7 @@ void signal_hangup();
 void signal_interact(); 
 void signal_quit(); 
   
-  
+
 void main() 
 { 
     int pid; 
@@ -36,7 +36,7 @@ void main()
         kill(pid, SIGHUP); 
   
         sleep(3); 
-        printf("\nParent: sends signal_interact signal\n\n"); 
+        printf("\nParent: sends SIGINT signal\n\n"); 
         kill(pid, SIGINT); 
   
         sleep(3); 
